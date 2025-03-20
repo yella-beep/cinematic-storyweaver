@@ -23,7 +23,17 @@ const stageVariants = {
   hover: {
     scale: 1.05,
     transition: { duration: 0.3 }
-  }
+  },
+  scroll: (i: number) => ({
+    x: 0,
+    y: 0,
+    rotate: i * 30,
+    scale: 0.9,
+    transition: {
+      duration: 1,
+      ease: [0.43, 0.13, 0.23, 0.96]
+    }
+  })
 };
 
 const Stage = ({ name, x, y, delay }: StageProps) => {
@@ -91,17 +101,21 @@ const logoVariants = {
 
 const Landing = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [animateRotation, setAnimateRotation] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
+      if (window.scrollY > 100 && !animateRotation) {
+        setAnimateRotation(true);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [animateRotation]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
@@ -116,36 +130,71 @@ const Landing = () => {
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
               opacity: Math.random() * 0.5 + 0.3,
+              animation: `twinkle ${Math.random() * 3 + 2}s infinite ease-in-out alternate`,
             }}
           ></div>
         ))}
       </div>
       
       {stages.map((stage, index) => (
-        <Stage
+        <motion.div
           key={stage.name}
-          name={stage.name}
-          x={scrollY > 100 ? 0 : stage.x}
-          y={scrollY > 100 ? 0 : stage.y}
-          delay={stage.delay}
-        />
+          className="absolute glass px-4 py-2 rounded-full text-sm md:text-base"
+          style={{ 
+            left: `${50 + stage.x}%`, 
+            top: `${50 + stage.y}%`, 
+            transform: 'translate(-50%, -50%)'
+          }}
+          initial="initial"
+          animate={scrollY > 100 ? "scroll" : "animate"}
+          custom={(index + 1) * 0.5}
+          whileHover="hover"
+          variants={stageVariants}
+        >
+          {stage.name}
+        </motion.div>
       ))}
       
       <motion.div 
         className="z-10 mb-8 relative"
         initial="hidden"
-        animate={scrollY > 100 ? "rotate" : "visible"}
+        animate={animateRotation ? "rotate" : "visible"}
         variants={logoVariants}
       >
-        <div className={`w-16 h-16 md:w-24 md:h-24 rounded-full bg-primary/20 flex items-center justify-center glass relative ${scrollY > 100 ? 'animate-rotate-slow' : ''}`}>
+        <motion.div 
+          className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-primary/20 flex items-center justify-center glass relative"
+          animate={{ 
+            boxShadow: animateRotation 
+              ? ['0 0 10px rgba(214, 173, 96, 0.3)', '0 0 20px rgba(214, 173, 96, 0.5)', '0 0 10px rgba(214, 173, 96, 0.3)'] 
+              : '0 0 0px transparent' 
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+        >
           <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-primary flex items-center justify-center">
             <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/30"></div>
           </div>
           
-          {scrollY > 100 && (
-            <div className="absolute -inset-6 border border-dashed border-primary/30 rounded-full"></div>
+          {animateRotation && (
+            <>
+              <motion.div 
+                className="absolute -inset-6 border border-dashed border-primary/30 rounded-full"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+              ></motion.div>
+              <motion.div 
+                className="absolute -inset-12 border border-dotted border-primary/20 rounded-full"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              ></motion.div>
+            </>
           )}
-        </div>
+        </motion.div>
       </motion.div>
       
       <motion.div
@@ -155,24 +204,37 @@ const Landing = () => {
         variants={textVariants}
       >
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-display mb-6 text-gradient-gold">
-          Orchestrating the Film Industry
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 1.2 }}
+          >
+            Orchestrating the Film Industry
+          </motion.span>
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground mb-8">
           Journey through the five stages of filmmaking with immersive storytelling.
         </p>
-        <a
+        <motion.a
           href="#development"
           className="glass px-6 py-3 rounded-full text-primary border border-primary/20 hover:bg-primary/10 transition-colors duration-300 inline-block"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
         >
           Begin the Journey
-        </a>
+        </motion.a>
       </motion.div>
       
-      <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+      <motion.div 
+        className="absolute bottom-10 left-0 right-0 flex justify-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+      >
         <div className="w-6 h-10 rounded-full border-2 border-primary/50 flex items-start justify-center p-1">
           <div className="w-1 h-2 bg-primary rounded-full animate-float"></div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
