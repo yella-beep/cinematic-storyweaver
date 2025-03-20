@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
-import { ScissorsIcon, WandIcon, WaveformIcon } from "lucide-react";
+import { ScissorsIcon, WandIcon, WaveIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
 const PostProduction = ({ onView }: { onView: () => void }) => {
@@ -115,7 +115,7 @@ const PostProduction = ({ onView }: { onView: () => void }) => {
         >
           <div className="flex items-center mb-3">
             <h3 className="text-xl font-display text-primary">Sound Design</h3>
-            <WaveformIcon className="w-5 h-5 ml-2 text-primary/70" />
+            <WaveIcon className="w-5 h-5 ml-2 text-primary/70" />
           </div>
           <div className="h-28 bg-cinematic-blue glass rounded-lg mb-4 flex items-center justify-center">
             <div className="w-3/4 h-12 flex items-end gap-1">
