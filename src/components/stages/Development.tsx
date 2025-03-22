@@ -1,22 +1,28 @@
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PencilIcon, FileTextIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Development = ({ onView }: { onView: () => void }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
   const scriptRef = useRef<HTMLDivElement>(null);
+  const [typing, setTyping] = useState(false);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  
+  const scriptLines = [
+    "FADE IN:",
+    "INT. OFFICE - DAY",
+    "A creative's workspace. Dimly lit with a warm glow.",
+    "A SCREENWRITER sits hunched over a desk, fingers dancing across a keyboard.",
+    "The birth of a story begins with a single idea..."
+  ];
   
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("opacity-100");
-          if (textRef.current) {
-            textRef.current.classList.add("animate-typing");
-            textRef.current.classList.add("after:animate-cursor-blink");
-          }
+          setTyping(true);
           onView();
         }
       },
@@ -33,6 +39,26 @@ const Development = ({ onView }: { onView: () => void }) => {
       }
     };
   }, [onView]);
+
+  useEffect(() => {
+    if (typing && currentTextIndex < scriptLines.length - 1) {
+      const timer = setTimeout(() => {
+        setCurrentTextIndex(prevIndex => prevIndex + 1);
+      }, 2500); // Time before next line appears
+      
+      return () => clearTimeout(timer);
+    }
+  }, [typing, currentTextIndex, scriptLines.length]);
+
+  const typewriterVariants = {
+    hidden: { opacity: 0 },
+    visible: (i: number) => ({
+      opacity: 1,
+      transition: {
+        delay: i * 0.5,
+      }
+    })
+  };
 
   return (
     <div 
@@ -72,41 +98,66 @@ const Development = ({ onView }: { onView: () => void }) => {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-float opacity-30"></div>
         
-        <div className="typewriter mb-6">
-          <h1 ref={textRef} className="text-lg md:text-xl font-mono after:content-['|'] after:ml-1 after:text-primary whitespace-pre-wrap sm:whitespace-nowrap overflow-hidden w-full">
-            FADE IN:
-          </h1>
-        </div>
-        
-        <motion.div 
-          className="mb-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-sm md:text-base font-mono mb-2">INT. OFFICE - DAY</p>
-          <p className="text-sm md:text-base font-mono mb-2">A creative's workspace. Dimly lit with a warm glow.</p>
-        </motion.div>
-        
-        <motion.div 
-          className="mb-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1.5 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-sm md:text-base font-mono mb-2">A SCREENWRITER sits hunched over a desk, fingers dancing across a keyboard.</p>
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 2 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-sm md:text-base font-mono">The birth of a story begins with a single idea...</p>
-        </motion.div>
+        {scriptLines.map((line, index) => (
+          index <= currentTextIndex && (
+            <motion.div 
+              key={index}
+              className={`mb-4 ${index === 0 ? "typewriter" : ""}`}
+              custom={index}
+              initial="hidden"
+              animate="visible"
+              variants={typewriterVariants}
+            >
+              {index === 0 ? (
+                <h1 className={`text-lg md:text-xl font-mono after:content-['|'] after:ml-1 after:text-primary ${typing ? "animate-typing after:animate-cursor-blink" : ""}`}>
+                  {line}
+                </h1>
+              ) : (
+                <p className="text-sm md:text-base font-mono mb-2 typing-text">
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ 
+                      duration: 1.5,
+                      ease: "easeInOut",
+                      delay: 0.1 
+                    }}
+                    className="relative inline-block"
+                  >
+                    {Array.from(line).map((char, charIndex) => (
+                      <motion.span
+                        key={charIndex}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{
+                          duration: 0.01,
+                          delay: charIndex * 0.05,
+                          ease: "easeIn"
+                        }}
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                    {index === currentTextIndex && (
+                      <motion.span
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{
+                          duration: 0.8,
+                          repeat: Infinity,
+                          repeatType: "loop"
+                        }}
+                        className="absolute -right-3 top-0 text-primary"
+                      >
+                        |
+                      </motion.span>
+                    )}
+                  </motion.span>
+                </p>
+              )}
+            </motion.div>
+          )
+        ))}
       </motion.div>
       
       <motion.div 
