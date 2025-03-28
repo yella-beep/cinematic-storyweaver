@@ -52,7 +52,7 @@ const Index = () => {
         <div className="container mx-auto px-6 text-center">
           <div className="flex justify-center items-center mb-4">
             <img 
-              src="/lovable-uploads/0278b8ec-692f-4fa6-935f-8a2e820a9a0b.png" 
+              src="/lovable-uploads/51af723e-d40a-4d3c-97b3-4ff3fb42d57b.png" 
               alt="Eonverse Logo" 
               className="h-10 w-auto object-contain mr-2"
             />

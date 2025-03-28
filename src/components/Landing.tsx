@@ -101,28 +101,41 @@ const Landing = () => {
       
       {/* Floating Stage Labels - Updated positioning to avoid overlapping */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {stages.map((stage, index) => (
-          <motion.div
-            key={stage.name}
-            className={`absolute glass px-4 py-2 rounded-full text-sm md:text-base text-white ${stage.className} pointer-events-auto`}
-            style={{ 
-              left: `${15 + ((index % 5) * 17)}%`, 
-              top: `${20 + ((index % 3) * 25)}%`,
-              transform: 'translate(-50%, -50%)'
-            }}
-            initial="initial"
-            animate="animate"
-            custom={(index + 1) * 0.5}
-            whileHover="hover"
-            variants={stageVariants}
-          >
-            {stage.name}
-          </motion.div>
-        ))}
+        {stages.map((stage, index) => {
+          // Custom positioning for each stage to avoid overlapping
+          let positionStyle = {};
+          
+          if (stage.name === "Development") {
+            positionStyle = { left: '20%', top: '20%' };
+          } else if (stage.name === "Pre-Production") {
+            positionStyle = { left: '15%', bottom: '20%', top: 'auto' };
+          } else if (stage.name === "Production") {
+            positionStyle = { right: '15%', bottom: '15%', left: 'auto', top: 'auto' };
+          } else if (stage.name === "Post-Production") {
+            positionStyle = { right: '20%', top: '25%', left: 'auto' };
+          } else if (stage.name === "Distribution") {
+            positionStyle = { left: '50%', top: '15%' };
+          }
+          
+          return (
+            <motion.div
+              key={stage.name}
+              className={`absolute glass px-4 py-2 rounded-full text-sm md:text-base text-white ${stage.className} pointer-events-auto`}
+              style={positionStyle}
+              initial="initial"
+              animate="animate"
+              custom={(index + 1) * 0.5}
+              whileHover="hover"
+              variants={stageVariants}
+            >
+              {stage.name}
+            </motion.div>
+          );
+        })}
       </div>
       
       <motion.div 
-        className="z-10 mb-8 relative"
+        className="z-10 mb-12 relative"
         initial="hidden"
         animate={animateRotation ? "rotate" : "visible"}
         variants={logoVariants}
@@ -163,7 +176,7 @@ const Landing = () => {
       </motion.div>
       
       <motion.div 
-        className="absolute bottom-10 left-0 right-0 flex justify-center z-20"
+        className="absolute bottom-12 left-0 right-0 flex justify-center z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
