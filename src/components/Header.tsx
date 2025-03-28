@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useIsMobile } from "../hooks/use-mobile";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,19 +36,19 @@ const Header = () => {
             alt="Eonverse Logo" 
             className="h-8 w-auto object-contain" 
           />
-          <span className="text-2xl font-openSauce text-cinematic-blue hover:text-white transition-colors duration-300">
+          <span className="text-xl sm:text-2xl font-openSauce text-cinematic-blue hover:text-white transition-colors duration-300">
             Eonverse
           </span>
         </Link>
 
         <nav className="hidden md:block">
-          <ul className="flex space-x-8">
+          <ul className="flex space-x-4 lg:space-x-8">
             {["Development", "Pre-Production", "Production", "Post-Production", "Distribution"].map(
               (item) => (
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase().replace("-", "")}`}
-                    className="text-white hover:text-cinematic-blue transition-colors duration-300 text-sm font-openSauce uppercase tracking-wide"
+                    className="text-white hover:text-cinematic-blue transition-colors duration-300 text-xs sm:text-sm font-openSauce uppercase tracking-wide"
                   >
                     {item}
                   </a>

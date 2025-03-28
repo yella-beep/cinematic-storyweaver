@@ -21,8 +21,8 @@ const stageVariants = {
 
 const stages = [
   { name: "Development", delay: 1, className: "float-random-1" },
-  { name: "Pre-Production", delay: 2, className: "float-random-2" },
-  { name: "Production", delay: 3, className: "float-random-3" },
+  { name: "Pre-Production", delay: 2, className: "animate-floatY" },
+  { name: "Production", delay: 3, className: "animate-floatY" },
   { name: "Post-Production", delay: 4, className: "float-random-4" },
   { name: "Distribution", delay: 5, className: "float-random-5" }
 ];
@@ -108,14 +108,23 @@ const Landing = () => {
           if (stage.name === "Development") {
             positionStyle = { left: '20%', top: '20%' };
           } else if (stage.name === "Pre-Production") {
-            positionStyle = { left: '15%', bottom: '20%', top: 'auto' };
+            positionStyle = { left: '15%', bottom: '25%', top: 'auto' };
           } else if (stage.name === "Production") {
-            positionStyle = { right: '15%', bottom: '15%', left: 'auto', top: 'auto' };
+            positionStyle = { right: '15%', bottom: '25%', left: 'auto', top: 'auto' };
           } else if (stage.name === "Post-Production") {
             positionStyle = { right: '20%', top: '25%', left: 'auto' };
           } else if (stage.name === "Distribution") {
             positionStyle = { left: '50%', top: '15%' };
           }
+          
+          // Apply responsive adjustments for mobile
+          const responsiveStyle = {
+            ...positionStyle,
+            '@media (max-width: 768px)': {
+              fontSize: '0.75rem',
+              padding: '0.5rem 1rem'
+            }
+          };
           
           return (
             <motion.div
@@ -135,7 +144,7 @@ const Landing = () => {
       </div>
       
       <motion.div 
-        className="z-10 mb-12 relative"
+        className="z-10 mb-16 md:mb-12 relative"
         initial="hidden"
         animate={animateRotation ? "rotate" : "visible"}
         variants={logoVariants}
@@ -148,12 +157,12 @@ const Landing = () => {
       </motion.div>
       
       <motion.div
-        className="z-10 text-center relative max-w-2xl px-6"
+        className="z-10 text-center relative max-w-2xl px-6 mt-4"
         initial="hidden"
         animate="visible"
         variants={textVariants}
       >
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-openSauce mb-6 text-gradient-blue">
+        <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-openSauce mb-6 text-gradient-blue">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -162,12 +171,12 @@ const Landing = () => {
             Orchestrating the Film Industry
           </motion.span>
         </h1>
-        <p className="text-lg md:text-xl text-white mb-12 font-openSauce">
+        <p className="text-base sm:text-lg md:text-xl text-white mb-8 md:mb-12 font-openSauce">
           Journey through the five stages of filmmaking with immersive storytelling.
         </p>
         <motion.a
           href="#development"
-          className="glass px-6 py-3 rounded-full text-white border border-primary/20 hover:bg-primary/10 transition-colors duration-300 inline-block font-openSauce"
+          className="glass px-4 sm:px-6 py-2 sm:py-3 rounded-full text-white border border-primary/20 hover:bg-primary/10 transition-colors duration-300 inline-block font-openSauce"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -176,7 +185,7 @@ const Landing = () => {
       </motion.div>
       
       <motion.div 
-        className="absolute bottom-12 left-0 right-0 flex justify-center z-20"
+        className="absolute bottom-8 md:bottom-12 left-0 right-0 flex justify-center z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
