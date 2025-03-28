@@ -24,27 +24,27 @@ const Index = () => {
       <Header />
       <ProgressIndicator currentStage={currentStage} />
       
-      <section id="landing">
+      <section id="landing" className="min-h-screen relative">
         <Landing />
       </section>
       
-      <section id="development">
+      <section id="development" className="min-h-screen pt-24 pb-16">
         <Development onView={() => handleStageView("development")} />
       </section>
       
-      <section id="preproduction">
+      <section id="preproduction" className="min-h-screen pt-24 pb-16">
         <PreProduction onView={() => handleStageView("preproduction")} />
       </section>
       
-      <section id="production">
+      <section id="production" className="min-h-screen pt-24 pb-16">
         <Production onView={() => handleStageView("production")} />
       </section>
       
-      <section id="postproduction">
+      <section id="postproduction" className="min-h-screen pt-24 pb-16">
         <PostProduction onView={() => handleStageView("postproduction")} />
       </section>
       
-      <section id="distribution">
+      <section id="distribution" className="min-h-screen pt-24 pb-16">
         <Distribution onView={() => handleStageView("distribution")} />
       </section>
       
@@ -52,7 +52,7 @@ const Index = () => {
         <div className="container mx-auto px-6 text-center">
           <div className="flex justify-center items-center mb-4">
             <img 
-              src="/lovable-uploads/51af723e-d40a-4d3c-97b3-4ff3fb42d57b.png" 
+              src="/lovable-uploads/0278b8ec-692f-4fa6-935f-8a2e820a9a0b.png" 
               alt="Eonverse Logo" 
               className="h-10 w-auto object-contain mr-2"
             />

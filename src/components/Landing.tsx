@@ -81,7 +81,7 @@ const Landing = () => {
   }, [animateRotation]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden py-20">
       <div className="absolute inset-0 bg-gradient-to-b from-cinematic-dark to-cinematic-blue/30 z-0"></div>
       
       <div className="absolute inset-0">
@@ -99,15 +99,15 @@ const Landing = () => {
         ))}
       </div>
       
-      {/* Floating Stage Labels */}
+      {/* Floating Stage Labels - Updated positioning to avoid overlapping */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {stages.map((stage, index) => (
           <motion.div
             key={stage.name}
             className={`absolute glass px-4 py-2 rounded-full text-sm md:text-base text-white ${stage.className} pointer-events-auto`}
             style={{ 
-              left: `${20 + (index * 15)}%`, 
-              top: `${30 + ((index % 3) * 20)}%`,
+              left: `${15 + ((index % 5) * 17)}%`, 
+              top: `${20 + ((index % 3) * 25)}%`,
               transform: 'translate(-50%, -50%)'
             }}
             initial="initial"
@@ -128,7 +128,7 @@ const Landing = () => {
         variants={logoVariants}
       >
         <img 
-          src="/lovable-uploads/51af723e-d40a-4d3c-97b3-4ff3fb42d57b.png" 
+          src="/lovable-uploads/0278b8ec-692f-4fa6-935f-8a2e820a9a0b.png" 
           alt="Eonverse Logo" 
           className="w-24 h-auto md:w-32 lg:w-40 object-contain"
         />
@@ -149,7 +149,7 @@ const Landing = () => {
             Orchestrating the Film Industry
           </motion.span>
         </h1>
-        <p className="text-lg md:text-xl text-white mb-8 font-openSauce">
+        <p className="text-lg md:text-xl text-white mb-12 font-openSauce">
           Journey through the five stages of filmmaking with immersive storytelling.
         </p>
         <motion.a
@@ -163,7 +163,7 @@ const Landing = () => {
       </motion.div>
       
       <motion.div 
-        className="absolute bottom-10 left-0 right-0 flex justify-center"
+        className="absolute bottom-10 left-0 right-0 flex justify-center z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
