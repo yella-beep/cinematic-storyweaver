@@ -27,9 +27,16 @@ const Header = () => {
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link
           to="/"
-          className="text-2xl font-display text-primary hover:text-white transition-colors duration-300"
+          className="flex items-center gap-2"
         >
-          Eonverse
+          <img 
+            src="/lovable-uploads/adffc72f-c8d5-4651-b3ae-98a044c55685.png" 
+            alt="Eonverse Logo" 
+            className="h-8 w-8 object-contain" 
+          />
+          <span className="text-2xl font-display text-cinematic-blue hover:text-white transition-colors duration-300">
+            Eonverse
+          </span>
         </Link>
 
         <nav className="hidden md:block">
@@ -39,7 +46,7 @@ const Header = () => {
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase().replace("-", "")}`}
-                    className="text-muted-foreground hover:text-white transition-colors duration-300 text-sm uppercase tracking-wide"
+                    className="text-white hover:text-cinematic-blue transition-colors duration-300 text-sm uppercase tracking-wide"
                   >
                     {item}
                   </a>
@@ -67,7 +74,7 @@ const Header = () => {
                   <li key={item} className="w-full text-center">
                     <a
                       href={`#${item.toLowerCase().replace("-", "")}`}
-                      className="text-xl font-display text-white hover:text-primary transition-colors duration-300 block py-2"
+                      className="text-xl font-display text-white hover:text-cinematic-blue transition-colors duration-300 block py-2"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item}

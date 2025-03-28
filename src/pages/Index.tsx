@@ -48,11 +48,18 @@ const Index = () => {
         <Distribution onView={() => handleStageView("distribution")} />
       </section>
       
-      <footer className="py-12 bg-cinematic-blue/50">
+      <footer className="py-12 bg-cinematic-blue/20">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-primary font-display text-xl mb-4">Eonverse</p>
-          <p className="text-sm text-muted-foreground">Orchestrating the Film Industry</p>
-          <p className="text-xs text-muted-foreground mt-4">&copy; {new Date().getFullYear()} Eonverse. All rights reserved.</p>
+          <div className="flex justify-center items-center mb-4">
+            <img 
+              src="/lovable-uploads/adffc72f-c8d5-4651-b3ae-98a044c55685.png" 
+              alt="Eonverse Logo" 
+              className="h-10 w-10 object-contain mr-2"
+            />
+            <p className="text-cinematic-blue font-display text-xl">Eonverse</p>
+          </div>
+          <p className="text-sm text-white">Orchestrating the Film Industry</p>
+          <p className="text-xs text-white/70 mt-4">&copy; {new Date().getFullYear()} Eonverse. All rights reserved.</p>
         </div>
       </footer>
     </div>

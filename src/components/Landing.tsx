@@ -36,26 +36,6 @@ const stageVariants = {
   })
 };
 
-const Stage = ({ name, x, y, delay }: StageProps) => {
-  return (
-    <motion.div
-      className="absolute glass px-4 py-2 rounded-full text-sm md:text-base"
-      style={{ 
-        left: `${50 + x}%`, 
-        top: `${50 + y}%`, 
-        transform: 'translate(-50%, -50%)'
-      }}
-      initial="initial"
-      animate="animate"
-      custom={delay}
-      whileHover="hover"
-      variants={stageVariants}
-    >
-      {name}
-    </motion.div>
-  );
-};
-
 const stages = [
   { name: "Development", x: -20, y: -15, delay: 1 },
   { name: "Pre-Production", x: 25, y: -25, delay: 2 },
@@ -119,13 +99,13 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-cinematic-dark to-cinematic-blue/70 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-cinematic-dark to-cinematic-blue/30 z-0"></div>
       
       <div className="absolute inset-0">
         {[...Array(50)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-0.5 h-0.5 rounded-full bg-white/40"
+            className="absolute w-0.5 h-0.5 rounded-full bg-white/60"
             style={{
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
@@ -139,7 +119,7 @@ const Landing = () => {
       {stages.map((stage, index) => (
         <motion.div
           key={stage.name}
-          className="absolute glass px-4 py-2 rounded-full text-sm md:text-base"
+          className="absolute glass px-4 py-2 rounded-full text-sm md:text-base text-white"
           style={{ 
             left: `${50 + stage.x}%`, 
             top: `${50 + stage.y}%`, 
@@ -161,40 +141,11 @@ const Landing = () => {
         animate={animateRotation ? "rotate" : "visible"}
         variants={logoVariants}
       >
-        <motion.div 
-          className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-primary/20 flex items-center justify-center glass relative"
-          animate={{ 
-            boxShadow: animateRotation 
-              ? ['0 0 10px rgba(214, 173, 96, 0.3)', '0 0 20px rgba(214, 173, 96, 0.5)', '0 0 10px rgba(214, 173, 96, 0.3)'] 
-              : '0 0 0px transparent' 
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        >
-          <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-primary flex items-center justify-center">
-            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/30"></div>
-          </div>
-          
-          {animateRotation && (
-            <>
-              <motion.div 
-                className="absolute -inset-6 border border-dashed border-primary/30 rounded-full"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
-              ></motion.div>
-              <motion.div 
-                className="absolute -inset-12 border border-dotted border-primary/20 rounded-full"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              ></motion.div>
-            </>
-          )}
-        </motion.div>
+        <img 
+          src="/lovable-uploads/adffc72f-c8d5-4651-b3ae-98a044c55685.png" 
+          alt="Eonverse Logo" 
+          className="w-24 h-24 md:w-32 md:h-32 object-contain"
+        />
       </motion.div>
       
       <motion.div
@@ -203,7 +154,7 @@ const Landing = () => {
         animate="visible"
         variants={textVariants}
       >
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-display mb-6 text-gradient-gold">
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-display mb-6 text-gradient-blue">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -212,12 +163,12 @@ const Landing = () => {
             Orchestrating the Film Industry
           </motion.span>
         </h1>
-        <p className="text-lg md:text-xl text-muted-foreground mb-8">
+        <p className="text-lg md:text-xl text-white mb-8">
           Journey through the five stages of filmmaking with immersive storytelling.
         </p>
         <motion.a
           href="#development"
-          className="glass px-6 py-3 rounded-full text-primary border border-primary/20 hover:bg-primary/10 transition-colors duration-300 inline-block"
+          className="glass px-6 py-3 rounded-full text-white border border-primary/20 hover:bg-primary/10 transition-colors duration-300 inline-block"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -231,8 +182,8 @@ const Landing = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
       >
-        <div className="w-6 h-10 rounded-full border-2 border-primary/50 flex items-start justify-center p-1">
-          <div className="w-1 h-2 bg-primary rounded-full animate-float"></div>
+        <div className="w-6 h-10 rounded-full border-2 border-white/50 flex items-start justify-center p-1">
+          <div className="w-1 h-2 bg-white rounded-full animate-float"></div>
         </div>
       </motion.div>
     </div>

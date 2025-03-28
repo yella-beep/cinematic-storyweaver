@@ -30,9 +30,9 @@ const ProgressIndicator = ({ currentStage }: ProgressIndicatorProps) => {
   return (
     <div className="fixed left-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
       <div className="flex flex-col items-center">
-        <div className="h-64 w-1 bg-muted relative">
+        <div className="h-64 w-1 bg-white/30 relative">
           <div
-            className="absolute bottom-0 left-0 w-1 bg-primary transition-all duration-700 ease-in-out"
+            className="absolute bottom-0 left-0 w-1 bg-cinematic-blue transition-all duration-700 ease-in-out"
             style={{ height: `${progress}%` }}
           ></div>
           
@@ -48,16 +48,16 @@ const ProgressIndicator = ({ currentStage }: ProgressIndicatorProps) => {
               >
                 <div
                   className={`w-3 h-3 rounded-full transition-all duration-500 ${
-                    isActive ? "bg-primary scale-100" : "bg-muted scale-75"
+                    isActive ? "bg-cinematic-blue scale-100" : "bg-white/30 scale-75"
                   }`}
                 ></div>
                 <div
                   className={`absolute left-6 pl-2 whitespace-nowrap text-xs transition-all duration-300 ${
                     currentStage === stage.id
-                      ? "opacity-100 text-primary font-medium"
+                      ? "opacity-100 text-cinematic-blue font-medium"
                       : isActive
-                      ? "opacity-70 text-muted-foreground"
-                      : "opacity-40 text-muted-foreground"
+                      ? "opacity-70 text-white"
+                      : "opacity-40 text-white/60"
                   }`}
                 >
                   {stage.label}

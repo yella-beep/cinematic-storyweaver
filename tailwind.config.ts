@@ -68,11 +68,11 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         cinematic: {
-          dark: "#0D0F13",
-          blue: "#151C2C",
-          gray: "#232730",
-          gold: "#D6AD60",
-          silver: "#E0E0E0",
+          dark: "#051C3F",
+          blue: "#1EAEDB",
+          lightBlue: "#33C3F0",
+          gray: "#F5F5F5",
+          white: "#FFFFFF",
         },
       },
       borderRadius: {
