@@ -52,14 +52,14 @@ const Index = () => {
         <div className="container mx-auto px-6 text-center">
           <div className="flex justify-center items-center mb-4">
             <img 
-              src="/lovable-uploads/adffc72f-c8d5-4651-b3ae-98a044c55685.png" 
+              src="/lovable-uploads/51af723e-d40a-4d3c-97b3-4ff3fb42d57b.png" 
               alt="Eonverse Logo" 
-              className="h-10 w-10 object-contain mr-2"
+              className="h-10 w-auto object-contain mr-2"
             />
-            <p className="text-cinematic-blue font-display text-xl">Eonverse</p>
+            <p className="text-cinematic-blue font-openSauce text-xl">Eonverse</p>
           </div>
-          <p className="text-sm text-white">Orchestrating the Film Industry</p>
-          <p className="text-xs text-white/70 mt-4">&copy; {new Date().getFullYear()} Eonverse. All rights reserved.</p>
+          <p className="text-sm text-white font-openSauce">Orchestrating the Film Industry</p>
+          <p className="text-xs text-white/70 mt-4 font-openSauce">&copy; {new Date().getFullYear()} Eonverse. All rights reserved.</p>
         </div>
       </footer>
     </div>

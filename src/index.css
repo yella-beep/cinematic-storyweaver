@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=open-sauce-one@400,500,600,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -73,7 +74,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-openSauce;
   }
 }
 
@@ -165,4 +166,54 @@
 
 .animate-float-horizontal {
   animation: float-horizontal 6s ease-in-out infinite;
+}
+
+@keyframes floatX {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(20px); }
+}
+
+@keyframes rotateRandom {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-floatX {
+  animation: floatX 8s ease-in-out infinite;
+}
+
+.animate-floatY {
+  animation: floatY 7s ease-in-out infinite;
+}
+
+.animate-rotate {
+  animation: rotateRandom 10s ease-in-out infinite;
+}
+
+.float-random-1 {
+  animation: floatX 9s ease-in-out infinite, floatY 13s ease-in-out infinite;
+}
+
+.float-random-2 {
+  animation: floatX 11s ease-in-out infinite reverse, rotateRandom 17s ease-in-out infinite;
+}
+
+.float-random-3 {
+  animation: floatY 10s ease-in-out infinite, rotateRandom 14s ease-in-out infinite reverse;
+}
+
+.float-random-4 {
+  animation: floatX 12s ease-in-out infinite, floatY 8s ease-in-out infinite reverse;
+}
+
+.float-random-5 {
+  animation: rotateRandom 15s ease-in-out infinite, floatY 9s ease-in-out infinite;
 }

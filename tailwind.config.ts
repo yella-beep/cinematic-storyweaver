@@ -22,6 +22,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         display: ['Playfair Display', 'serif'],
+        openSauce: ['"Open Sauce One"', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

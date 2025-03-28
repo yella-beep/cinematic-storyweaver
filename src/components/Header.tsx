@@ -30,11 +30,11 @@ const Header = () => {
           className="flex items-center gap-2"
         >
           <img 
-            src="/lovable-uploads/adffc72f-c8d5-4651-b3ae-98a044c55685.png" 
+            src="/lovable-uploads/51af723e-d40a-4d3c-97b3-4ff3fb42d57b.png" 
             alt="Eonverse Logo" 
-            className="h-8 w-8 object-contain" 
+            className="h-8 w-auto object-contain" 
           />
-          <span className="text-2xl font-display text-cinematic-blue hover:text-white transition-colors duration-300">
+          <span className="text-2xl font-openSauce text-cinematic-blue hover:text-white transition-colors duration-300">
             Eonverse
           </span>
         </Link>
@@ -46,7 +46,7 @@ const Header = () => {
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase().replace("-", "")}`}
-                    className="text-white hover:text-cinematic-blue transition-colors duration-300 text-sm uppercase tracking-wide"
+                    className="text-white hover:text-cinematic-blue transition-colors duration-300 text-sm font-openSauce uppercase tracking-wide"
                   >
                     {item}
                   </a>
@@ -74,7 +74,7 @@ const Header = () => {
                   <li key={item} className="w-full text-center">
                     <a
                       href={`#${item.toLowerCase().replace("-", "")}`}
-                      className="text-xl font-display text-white hover:text-cinematic-blue transition-colors duration-300 block py-2"
+                      className="text-xl font-openSauce text-white hover:text-cinematic-blue transition-colors duration-300 block py-2"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item}

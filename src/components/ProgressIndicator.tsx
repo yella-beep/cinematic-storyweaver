@@ -28,7 +28,7 @@ const ProgressIndicator = ({ currentStage }: ProgressIndicatorProps) => {
   }, [currentStage]);
 
   return (
-    <div className="fixed left-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
+    <div className="fixed left-4 md:left-6 top-1/2 transform -translate-y-1/2 z-40 hidden md:block">
       <div className="flex flex-col items-center">
         <div className="h-64 w-1 bg-white/30 relative">
           <div
@@ -52,7 +52,7 @@ const ProgressIndicator = ({ currentStage }: ProgressIndicatorProps) => {
                   }`}
                 ></div>
                 <div
-                  className={`absolute left-6 pl-2 whitespace-nowrap text-xs transition-all duration-300 ${
+                  className={`absolute left-6 pl-2 whitespace-nowrap text-xs font-openSauce transition-all duration-300 ${
                     currentStage === stage.id
                       ? "opacity-100 text-cinematic-blue font-medium"
                       : isActive

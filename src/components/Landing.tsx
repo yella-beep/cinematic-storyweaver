@@ -1,13 +1,6 @@
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-
-interface StageProps {
-  name: string;
-  x: number;
-  y: number;
-  delay: number;
-}
 
 const stageVariants = {
   initial: { opacity: 0, scale: 0.8 },
@@ -23,25 +16,15 @@ const stageVariants = {
   hover: {
     scale: 1.05,
     transition: { duration: 0.3 }
-  },
-  scroll: (i: number) => ({
-    x: 0,
-    y: 0,
-    rotate: i * 30,
-    scale: 0.9,
-    transition: {
-      duration: 1,
-      ease: [0.43, 0.13, 0.23, 0.96]
-    }
-  })
+  }
 };
 
 const stages = [
-  { name: "Development", x: -20, y: -15, delay: 1 },
-  { name: "Pre-Production", x: 25, y: -25, delay: 2 },
-  { name: "Production", x: -30, y: 10, delay: 3 },
-  { name: "Post-Production", x: 15, y: 25, delay: 4 },
-  { name: "Distribution", x: 35, y: 0, delay: 5 }
+  { name: "Development", delay: 1, className: "float-random-1" },
+  { name: "Pre-Production", delay: 2, className: "float-random-2" },
+  { name: "Production", delay: 3, className: "float-random-3" },
+  { name: "Post-Production", delay: 4, className: "float-random-4" },
+  { name: "Distribution", delay: 5, className: "float-random-5" }
 ];
 
 const textVariants = {
@@ -116,24 +99,27 @@ const Landing = () => {
         ))}
       </div>
       
-      {stages.map((stage, index) => (
-        <motion.div
-          key={stage.name}
-          className="absolute glass px-4 py-2 rounded-full text-sm md:text-base text-white"
-          style={{ 
-            left: `${50 + stage.x}%`, 
-            top: `${50 + stage.y}%`, 
-            transform: 'translate(-50%, -50%)'
-          }}
-          initial="initial"
-          animate={scrollY > 100 ? "scroll" : "animate"}
-          custom={(index + 1) * 0.5}
-          whileHover="hover"
-          variants={stageVariants}
-        >
-          {stage.name}
-        </motion.div>
-      ))}
+      {/* Floating Stage Labels */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {stages.map((stage, index) => (
+          <motion.div
+            key={stage.name}
+            className={`absolute glass px-4 py-2 rounded-full text-sm md:text-base text-white ${stage.className} pointer-events-auto`}
+            style={{ 
+              left: `${20 + (index * 15)}%`, 
+              top: `${30 + ((index % 3) * 20)}%`,
+              transform: 'translate(-50%, -50%)'
+            }}
+            initial="initial"
+            animate="animate"
+            custom={(index + 1) * 0.5}
+            whileHover="hover"
+            variants={stageVariants}
+          >
+            {stage.name}
+          </motion.div>
+        ))}
+      </div>
       
       <motion.div 
         className="z-10 mb-8 relative"
@@ -142,9 +128,9 @@ const Landing = () => {
         variants={logoVariants}
       >
         <img 
-          src="/lovable-uploads/adffc72f-c8d5-4651-b3ae-98a044c55685.png" 
+          src="/lovable-uploads/51af723e-d40a-4d3c-97b3-4ff3fb42d57b.png" 
           alt="Eonverse Logo" 
-          className="w-24 h-24 md:w-32 md:h-32 object-contain"
+          className="w-24 h-auto md:w-32 lg:w-40 object-contain"
         />
       </motion.div>
       
@@ -154,7 +140,7 @@ const Landing = () => {
         animate="visible"
         variants={textVariants}
       >
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-display mb-6 text-gradient-blue">
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-openSauce mb-6 text-gradient-blue">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -163,12 +149,12 @@ const Landing = () => {
             Orchestrating the Film Industry
           </motion.span>
         </h1>
-        <p className="text-lg md:text-xl text-white mb-8">
+        <p className="text-lg md:text-xl text-white mb-8 font-openSauce">
           Journey through the five stages of filmmaking with immersive storytelling.
         </p>
         <motion.a
           href="#development"
-          className="glass px-6 py-3 rounded-full text-white border border-primary/20 hover:bg-primary/10 transition-colors duration-300 inline-block"
+          className="glass px-6 py-3 rounded-full text-white border border-primary/20 hover:bg-primary/10 transition-colors duration-300 inline-block font-openSauce"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
         >
